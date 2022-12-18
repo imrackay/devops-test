@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                docker build -t mynginx_1:latest -f Dockerfile
+                sh 'docker build -t mynginx:latest -f Dockerfile .'
             }
         }
     }
