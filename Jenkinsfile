@@ -1,5 +1,10 @@
 pipeline {
     agent any
+
+    environment {
+        DOCKER_HUB_USERNAME = credentials('dockertest')
+        DOCKER_HUB_PASSWORD = credentials('dockertest')
+    }
     stages {
         stage('Build') {
             steps {
@@ -8,12 +13,9 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                withCredentials([string(credentialsId: 'dockertest', variable: 'USERNAME'),
-                                 string(credentialsId: 'dockertest', variable: 'PASSWORD')]) {
-                    bat 'echo $USERNAME:$PASSWORD | docker login -u $USERNAME --password-stdin'
+                bat 'docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD'
                 bat 'docker tag mynginx:latest imrackay/test:latest'
                 bat 'docker push imrackay/test:latest'
-                }
             }
         }
     }
