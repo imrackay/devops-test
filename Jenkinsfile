@@ -13,6 +13,7 @@ pipeline {
                     bat 'echo $USERNAME:$PASSWORD | docker login -u $USERNAME --password-stdin'
                 bat 'docker tag mynginx:latest imrackay/test:latest'
                 bat 'docker push imrackay/test:latest'
+                }
             }
         }
     }
