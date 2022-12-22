@@ -3,7 +3,6 @@ pipeline {
 
     environment {
         DOCKER_HUB_USERNAME = credentials('dockertest')
-        DOCKER_HUB_PASSWORD = credentials('dockertest')
     }
     stages {
         stage('Build') {
